@@ -1,0 +1,7 @@
+{
+  "name": "Gita Wisdom",
+  "description": "A comprehensive guide to the 100 most important teachings of the Bhagavad Gita, featuring AI-powered insights and practical applications for modern life.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

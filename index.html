@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gita Wisdom | The Eternal Song</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Merriweather', 'serif'],
+              sanskrit: ['"Tiro Devanagari Sanskrit"', 'serif'],
+              epic: ['Cinzel', 'serif'],
+              antique: ['Chandas', '"Devanagari MT"', '"Tiro Devanagari Sanskrit"', 'serif'],
+            },
+            colors: {
+              saffron: {
+                50: '#fff8e1',
+                100: '#ffecb3',
+                200: '#ffe082',
+                300: '#ffd54f',
+                400: '#ffca28',
+                500: '#ffc107',
+                600: '#ffb300',
+                700: '#ffa000',
+                800: '#ff8f00',
+                900: '#ff6f00',
+              },
+              deep: {
+                700: '#2d3748',
+                800: '#1a202c',
+                900: '#0f1012', 
+                950: '#050505',
+              },
+              ink: {
+                900: '#1a0f0a',
+                800: '#2c1810',
+                700: '#3e2723',
+                600: '#4e342e',
+                500: '#5d4037',
+              },
+              paper: {
+                100: '#fdfbf7',
+                200: '#f5f0e6',
+                300: '#e6d5b8',
+              }
+            },
+            animation: {
+              'spin-slow': 'spin 60s linear infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'float-delayed': 'float 8s ease-in-out infinite 2s',
+              'breathe': 'breathe 12s infinite ease-in-out',
+              'fade-in': 'fadeIn 1s ease-out forwards',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+              },
+              breathe: {
+                '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },   // Exhale/Start
+                '33%': { transform: 'scale(1.5)', opacity: '1' },        // Inhale End
+                '66%': { transform: 'scale(1.5)', opacity: '1' }         // Hold End
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' }
+              },
+              scrollParchment: {
+                '0%': { backgroundPosition: '0px 0px, center center' },
+                '100%': { backgroundPosition: '1000px 500px, center center' } 
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* BASE THEME (Parchment/Light) */
+      body {
+        background-color: #f5f0e6;
+        color: #3e2723;
+        margin: 0;
+        padding: 0;
+        /* Smooth Global Transition for Theme Switching */
+        transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1), background-image 0.7s ease;
+        /* Parchment Texture */
+        background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+      }
+
+      /* DARK THEME OVERRIDES */
+      .dark body {
+        background-color: #0f1012;
+        color: #e2e8f0;
+        background-image: 
+          radial-gradient(circle at 50% 50%, rgba(255, 160, 0, 0.03) 0%, transparent 60%),
+          url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      /* Ensure common elements transition smoothly */
+      div, section, nav, button, p, h1, h2, h3, h4, span, svg {
+        transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+        transition-duration: 500ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      .font-sanskrit {
+        font-feature-settings: "kern" 1, "liga" 1;
+      }
+      
+      /* Realistic Ancient Parchment Texture (Used in Modal) */
+      .bg-parchment {
+        background-color: #dcb880; /* Darker, richer base */
+        background-image: 
+          url("https://www.transparenttextures.com/patterns/aged-paper.png"),
+          radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%);
+        background-blend-mode: multiply, normal;
+        box-shadow: inset 0 0 150px rgba(0,0,0,0.6); /* Strong vignette */
+      }
+
+      /* Animation to scroll the texture ONLY, keeping gradient centered */
+      @keyframes scroll-parchment {
+        0% { background-position: 0px 0px, center center; }
+        100% { background-position: 1000px 500px, center center; } 
+      }
+      
+      .animate-parchment {
+        animation: scroll-parchment 180s linear infinite;
+        will-change: background-position;
+      }
+      
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      
+      /* Dark Mode Scrollbar */
+      .dark ::-webkit-scrollbar-track {
+        background: #0f1012; 
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #333; 
+      }
+      
+      /* Light Mode Scrollbar */
+      ::-webkit-scrollbar-track {
+        background: #e6d5b8;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #8d6e63;
+        border-radius: 4px;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
